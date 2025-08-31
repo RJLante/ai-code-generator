@@ -1,4 +1,4 @@
-package com.rd.aicodegenerator.model.dto;
+package com.rd.aicodegenerator.model.dto.user;
 
 import com.rd.aicodegenerator.common.PageRequest;
 import lombok.Data;

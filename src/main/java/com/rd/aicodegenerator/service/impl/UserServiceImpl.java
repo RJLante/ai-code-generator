@@ -7,7 +7,7 @@ import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.rd.aicodegenerator.exception.BusinessException;
 import com.rd.aicodegenerator.exception.ErrorCode;
-import com.rd.aicodegenerator.model.dto.UserQueryRequest;
+import com.rd.aicodegenerator.model.dto.user.UserQueryRequest;
 import com.rd.aicodegenerator.model.entity.User;
 import com.rd.aicodegenerator.mapper.UserMapper;
 import com.rd.aicodegenerator.model.enums.UserRoleEnum;
