@@ -3,7 +3,7 @@ package com.rd.aicodegenerator.core.parser;
 /**
  * 代码解析器策略接口
  * 
- * @author yupi
+ * @author rd
  */
 public interface CodeParser<T> {
 
