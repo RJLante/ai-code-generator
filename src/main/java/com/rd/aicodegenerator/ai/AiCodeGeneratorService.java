@@ -2,7 +2,9 @@ package com.rd.aicodegenerator.ai;
 
 import com.rd.aicodegenerator.ai.model.HtmlCodeResult;
 import com.rd.aicodegenerator.ai.model.MultiFileCodeResult;
+import dev.langchain4j.service.MemoryId;
 import dev.langchain4j.service.SystemMessage;
+import dev.langchain4j.service.UserMessage;
 import reactor.core.publisher.Flux;
 
 import java.io.File;

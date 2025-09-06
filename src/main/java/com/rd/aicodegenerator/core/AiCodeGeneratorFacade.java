@@ -1,6 +1,7 @@
 package com.rd.aicodegenerator.core;
 
 import com.rd.aicodegenerator.ai.AiCodeGeneratorService;
+import com.rd.aicodegenerator.ai.AiCodeGeneratorServiceFactory;
 import com.rd.aicodegenerator.ai.model.HtmlCodeResult;
 import com.rd.aicodegenerator.ai.model.MultiFileCodeResult;
 import com.rd.aicodegenerator.core.parser.CodeParserExecutor;
@@ -24,7 +25,7 @@ import java.io.File;
 public class AiCodeGeneratorFacade {
 
     @Resource
-    private AiCodeGeneratorService aiCodeGeneratorService;
+    private AiCodeGeneratorServiceFactory aiCodeGeneratorServiceFactory;
 
     /**
      * 统一接口，根据类型生成并保存代码
@@ -38,6 +39,8 @@ public class AiCodeGeneratorFacade {
         if (codeGenTypeEnum == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "生成类型不能为空");
         }
+        // 根据 appId 获取对应的 AI 服务实例
+        AiCodeGeneratorService aiCodeGeneratorService = aiCodeGeneratorServiceFactory.getAiCodeGeneratorService(appId);
         return switch (codeGenTypeEnum) {
             case HTML -> {
                 HtmlCodeResult result = aiCodeGeneratorService.generateHtmlCode(userMessage);
@@ -66,6 +69,8 @@ public class AiCodeGeneratorFacade {
         if (codeGenTypeEnum == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "生成类型不能为空");
         }
+        // 根据 appId 获取对应的 AI 服务实例
+        AiCodeGeneratorService aiCodeGeneratorService = aiCodeGeneratorServiceFactory.getAiCodeGeneratorService(appId);
         return switch (codeGenTypeEnum) {
             case HTML -> {
                 Flux<String> codeStream = aiCodeGeneratorService.generateHtmlCodeStream(userMessage);
@@ -107,7 +112,6 @@ public class AiCodeGeneratorFacade {
             } catch (Exception e) {
                 log.error("代码保存失败: {}", e.getMessage());
             }
-
         });
     }
 
