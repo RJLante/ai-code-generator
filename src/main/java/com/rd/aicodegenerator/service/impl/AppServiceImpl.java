@@ -11,8 +11,6 @@ import com.rd.aicodegenerator.constant.AppConstant;
 import com.rd.aicodegenerator.core.AiCodeGeneratorFacade;
 import com.rd.aicodegenerator.core.builder.VueProjectBuilder;
 import com.rd.aicodegenerator.core.handler.StreamHandlerExecutor;
-import com.rd.aicodegenerator.core.parser.CodeParserExecutor;
-import com.rd.aicodegenerator.core.saver.CodeFileSaverExecutor;
 import com.rd.aicodegenerator.exception.BusinessException;
 import com.rd.aicodegenerator.exception.ErrorCode;
 import com.rd.aicodegenerator.exception.ThrowUtils;
@@ -20,12 +18,12 @@ import com.rd.aicodegenerator.model.dto.app.AppQueryRequest;
 import com.rd.aicodegenerator.model.entity.App;
 import com.rd.aicodegenerator.mapper.AppMapper;
 import com.rd.aicodegenerator.model.entity.User;
-import com.rd.aicodegenerator.model.enums.ChatHistoryMessageTypeEnum;
 import com.rd.aicodegenerator.model.enums.CodeGenTypeEnum;
 import com.rd.aicodegenerator.model.vo.AppVO;
 import com.rd.aicodegenerator.model.vo.UserVO;
 import com.rd.aicodegenerator.service.AppService;
 import com.rd.aicodegenerator.service.ChatHistoryService;
+import com.rd.aicodegenerator.service.ScreenShotService;
 import com.rd.aicodegenerator.service.UserService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -64,6 +62,9 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App>  implements AppS
 
     @Resource
     private VueProjectBuilder vueProjectBuilder;
+
+    @Resource
+    private ScreenShotService screenShotService;
 
     @Override
     public Flux<String> ChatToGenCode(Long appId, String message, User loginUser) {
@@ -144,8 +145,31 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App>  implements AppS
         updateApp.setDeployedTime(LocalDateTime.now());
         boolean updateResult = this.updateById(updateApp);
         ThrowUtils.throwIf(!updateResult, ErrorCode.OPERATION_ERROR, "更新应用部署信息失败");
-        // 10. 返回可访问的 URL
-        return String.format("%s/%s/", AppConstant.CODE_DEPLOY_HOST, deployKey);
+        // 10. 得到可访问的 URL
+        String appDeployUrl = String.format("%s/%s/", AppConstant.CODE_DEPLOY_HOST, deployKey);
+        // 11. 异步生成截图并更新应用封面
+        generateAppScreenshotAsync(appId, appDeployUrl);
+        return appDeployUrl;
+    }
+
+    /**
+     * 异步生成应用截图并更新封面
+     *
+     * @param appId  应用ID
+     * @param appUrl 应用访问URL
+     */
+    @Override
+    public void generateAppScreenshotAsync(Long appId, String appUrl) {
+        // 启用虚拟线程并执行
+        Thread.startVirtualThread(() -> {
+            String screenshotUrl = screenShotService.generateAndUploadScreenshot(appUrl);
+            // 更新数据库的封面
+            App updateApp = new App();
+            updateApp.setId(appId);
+            updateApp.setCover(screenshotUrl);
+            boolean updated = this.updateById(updateApp);
+            ThrowUtils.throwIf(!updated, ErrorCode.OPERATION_ERROR, "更新应用封面失败");
+        });
     }
 
 
