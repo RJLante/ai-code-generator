@@ -2,7 +2,7 @@ package com.rd.aicodegenerator.ai;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.rd.aicodegenerator.ai.tools.FileWriteTool;
+import com.rd.aicodegenerator.ai.tools.*;
 import com.rd.aicodegenerator.exception.BusinessException;
 import com.rd.aicodegenerator.exception.ErrorCode;
 import com.rd.aicodegenerator.model.enums.CodeGenTypeEnum;
@@ -41,6 +41,9 @@ public class AiCodeGeneratorServiceFactory {
 
     @Resource
     private ChatHistoryService chatHistoryService;
+
+    @Resource
+    private ToolManager toolManager;
 
     /**
      * AI 服务实例缓存
@@ -101,7 +104,7 @@ public class AiCodeGeneratorServiceFactory {
                     .chatModel(chatModel)
                     .streamingChatModel(reasoningStreamingChatModel)
                     .chatMemoryProvider(memoryId -> chatMemory)
-                    .tools(new FileWriteTool())
+                    .tools(toolManager.getAllTools())
                     // 处理工具调用幻觉问题
                     .hallucinatedToolNameStrategy(toolExecutionRequest ->
                             ToolExecutionResultMessage.from(toolExecutionRequest,
