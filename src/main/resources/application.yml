@@ -59,6 +59,16 @@ langchain4j:
       log-requests: true
       log-responses: true
 
+# Pexels API
+pexels:
+  api-key: <Your API Key>
+
+# 阿里云 DashScope 配置
+dashscope:
+  api-key: <Your API Key>
+  image-model: wan2.2-t2i-flash
+
+
 
 
 
