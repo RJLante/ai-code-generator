@@ -1,14 +1,11 @@
 package com.rd.aicodegenerator.core.handler;
 
-import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.rd.aicodegenerator.ai.message.*;
 import com.rd.aicodegenerator.ai.tools.BaseTool;
 import com.rd.aicodegenerator.ai.tools.ToolManager;
-import com.rd.aicodegenerator.constant.AppConstant;
-import com.rd.aicodegenerator.core.builder.VueProjectBuilder;
 import com.rd.aicodegenerator.model.entity.User;
 import com.rd.aicodegenerator.model.enums.ChatHistoryMessageTypeEnum;
 import com.rd.aicodegenerator.service.ChatHistoryService;
@@ -27,9 +24,6 @@ import java.util.Set;
 @Slf4j
 @Component
 public class JsonMessageStreamHandler {
-
-    @Resource
-    private VueProjectBuilder vueProjectBuilder;
 
     @Resource
     private ToolManager toolManager;
@@ -61,8 +55,6 @@ public class JsonMessageStreamHandler {
                     // 流式响应完成后，添加 AI 消息到对话历史
                     String aiResponse = chatHistoryStringBuilder.toString();
                     chatHistoryService.addChatMessage(appId, aiResponse, ChatHistoryMessageTypeEnum.AI.getValue(), loginUser.getId());
-                    String projectPath = AppConstant.CODE_OUTPUT_ROOT_DIR + "/vue_project_" + appId;
-                    vueProjectBuilder.buildProjectAsync(projectPath);
                 })
                 .doOnError(error -> {
                     // 如果AI回复失败，也要记录错误消息
