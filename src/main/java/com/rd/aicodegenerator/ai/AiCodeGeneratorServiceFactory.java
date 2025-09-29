@@ -2,6 +2,8 @@ package com.rd.aicodegenerator.ai;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.rd.aicodegenerator.ai.guardrail.PromptSafetyInputGuardrail;
+import com.rd.aicodegenerator.ai.guardrail.RetryOutputGuardrail;
 import com.rd.aicodegenerator.ai.tools.*;
 import com.rd.aicodegenerator.exception.BusinessException;
 import com.rd.aicodegenerator.exception.ErrorCode;
@@ -106,6 +108,9 @@ public class AiCodeGeneratorServiceFactory {
                             ToolExecutionResultMessage.from(toolExecutionRequest,
                                     "Error: there is no tool called " + toolExecutionRequest.name())
                     )
+                        .maxSequentialToolsInvocations(20) // 允许最多 20 个工具调用
+                        .inputGuardrails(new PromptSafetyInputGuardrail()) // 添加输入护轨
+//                        .outputGuardrails(new RetryOutputGuardrail()) // 添加输出护轨（流式输出不适用）
                     .build();
             }
             // 原生 HTML 模式和多文件模式，使用流式对话模型
@@ -116,6 +121,7 @@ public class AiCodeGeneratorServiceFactory {
                         .chatModel(chatModel)
                         .streamingChatModel(openAiStreamingChatModel)
                         .chatMemory(chatMemory)
+                        .inputGuardrails(new PromptSafetyInputGuardrail()) // 添加输入护轨
                         .build();
             }
             default ->
