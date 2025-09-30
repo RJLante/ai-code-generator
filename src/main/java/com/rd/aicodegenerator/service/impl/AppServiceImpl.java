@@ -24,6 +24,8 @@ import com.rd.aicodegenerator.model.entity.User;
 import com.rd.aicodegenerator.model.enums.CodeGenTypeEnum;
 import com.rd.aicodegenerator.model.vo.AppVO;
 import com.rd.aicodegenerator.model.vo.UserVO;
+import com.rd.aicodegenerator.monitor.MonitorContext;
+import com.rd.aicodegenerator.monitor.MonitorContextHolder;
 import com.rd.aicodegenerator.service.AppService;
 import com.rd.aicodegenerator.service.ChatHistoryService;
 import com.rd.aicodegenerator.service.ScreenShotService;
@@ -115,10 +117,20 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App>  implements AppS
         }
         // 5. 在调用 AI 前，先保存用户消息在数据库中
         chatHistoryService.addChatMessage(appId, message, "user", loginUser.getId());
-        // 6. 调用 AI 生成代码（流式）
+        // 6. 设置监控上下文（用户 ID 和 应用 ID）
+        MonitorContextHolder.setContext(MonitorContext.builder()
+                .userId(loginUser.getId().toString())
+                .appId(appId.toString())
+                .build()
+        );
+        // 7  调用 AI 生成代码（流式）
         Flux<String> codeStream = aiCodeGeneratorFacade.generateAndSaveCodeStream(message, codeGenTypeEnum, appId);
-        // 7. 收集 AI 响应的内容，并且在完成后保存记录在对话历史
-        return streamHandlerExecutor.doExecute(codeStream, chatHistoryService, appId, loginUser, codeGenTypeEnum);
+        // 8. 收集 AI 响应的内容，并且在完成后保存记录在对话历史
+        return streamHandlerExecutor.doExecute(codeStream, chatHistoryService, appId, loginUser, codeGenTypeEnum)
+                .doFinally(signalType -> {
+                    // 9. 流结束时清理，无论失败、成功或取消
+                    MonitorContextHolder.clearContext();
+                });
     }
 
     @Override
