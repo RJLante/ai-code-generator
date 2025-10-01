@@ -11,6 +11,7 @@
     <groupId>com.rd</groupId>
     <artifactId>ai-code-generator</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>ai-code-generator</name>
     <description>ai-code-generator</description>
     <url/>
@@ -20,6 +21,9 @@
     <developers>
         <developer/>
     </developers>
+    <modules>
+        <module>ai-code-generator-microservice</module>
+    </modules>
     <scm>
         <connection/>
         <developerConnection/>

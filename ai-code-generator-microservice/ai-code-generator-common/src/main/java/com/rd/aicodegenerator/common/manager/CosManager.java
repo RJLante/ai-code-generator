@@ -1,11 +1,12 @@
-package com.rd.aicodegenerator.manager;
+package com.rd.aicodegenerator.common.manager;
 
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.model.PutObjectResult;
-import com.rd.aicodegenerator.config.CosClientConfig;
+import com.rd.aicodegenerator.common.config.CosClientConfig;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
