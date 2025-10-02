@@ -1,6 +1,6 @@
 package com.rd.aicodegenerator.model.dto.chatHistory;
 
-import com.rd.aicodegenerator.common.PageRequest;
+import com.rd.aicodegenerator.PageRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

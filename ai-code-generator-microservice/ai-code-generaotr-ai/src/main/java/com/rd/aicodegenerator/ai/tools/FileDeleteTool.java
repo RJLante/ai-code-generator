@@ -1,7 +1,7 @@
 package com.rd.aicodegenerator.ai.tools;
 
 import cn.hutool.json.JSONObject;
-import com.rd.aicodegenerator.common.constant.AppConstant;
+import com.rd.aicodegenerator.constant.AppConstant;
 import dev.langchain4j.agent.tool.P;
 import dev.langchain4j.agent.tool.Tool;
 import dev.langchain4j.agent.tool.ToolMemoryId;

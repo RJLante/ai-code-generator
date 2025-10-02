@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>ai-code-generaotr-ai</artifactId>
+    <artifactId>ai-code-generator-ai</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

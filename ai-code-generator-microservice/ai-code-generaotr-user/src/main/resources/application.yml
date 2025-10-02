@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ai-code-generator-user
+    name: ai-code-user
   # session
   session:
     store-type: redis
@@ -33,7 +33,7 @@ server:
 springdoc:
   group-configs:
     - group: 'default'
-      packages-to-scan: com.rd.aicodegenerator.controller
+      packages-to-scan: com.rd.aicodeuser.controller
 # knife4j
 knife4j:
   enable: true

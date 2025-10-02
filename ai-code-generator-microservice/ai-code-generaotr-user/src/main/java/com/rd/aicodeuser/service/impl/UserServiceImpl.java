@@ -6,8 +6,8 @@ import cn.hutool.core.util.StrUtil;
 import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.rd.aicodeuser.service.UserService;
-import com.rd.aicodegenerator.common.exception.BusinessException;
-import com.rd.aicodegenerator.common.exception.ErrorCode;
+import com.rd.aicodegenerator.exception.BusinessException;
+import com.rd.aicodegenerator.exception.ErrorCode;
 import com.rd.aicodegenerator.model.dto.user.UserQueryRequest;
 import com.rd.aicodegenerator.model.entity.User;
 import com.rd.aicodeuser.mapper.UserMapper;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.rd.aicodegenerator.common.constant.UserConstant.USER_LOGIN_STATE;
+import static com.rd.aicodegenerator.constant.UserConstant.USER_LOGIN_STATE;
 
 /**
  * 用户 服务层实现。

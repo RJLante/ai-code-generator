@@ -1,7 +1,7 @@
 package com.rd.aicodegenerator.innerservice;
 
-import com.rd.aicodegenerator.common.exception.BusinessException;
-import com.rd.aicodegenerator.common.exception.ErrorCode;
+import com.rd.aicodegenerator.exception.BusinessException;
+import com.rd.aicodegenerator.exception.ErrorCode;
 import com.rd.aicodegenerator.model.entity.User;
 import com.rd.aicodegenerator.model.vo.UserVO;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
-import static com.rd.aicodegenerator.common.constant.UserConstant.USER_LOGIN_STATE;
+import static com.rd.aicodegenerator.constant.UserConstant.USER_LOGIN_STATE;
 
 /**
  * 内部用户服务

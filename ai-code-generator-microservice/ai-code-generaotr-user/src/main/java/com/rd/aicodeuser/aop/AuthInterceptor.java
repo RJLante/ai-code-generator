@@ -1,8 +1,8 @@
 package com.rd.aicodeuser.aop;
 
-import com.rd.aicodegenerator.common.annotation.AuthCheck;
-import com.rd.aicodegenerator.common.exception.BusinessException;
-import com.rd.aicodegenerator.common.exception.ErrorCode;
+import com.rd.aicodegenerator.annotation.AuthCheck;
+import com.rd.aicodegenerator.exception.BusinessException;
+import com.rd.aicodegenerator.exception.ErrorCode;
 import com.rd.aicodegenerator.model.entity.User;
 import com.rd.aicodegenerator.model.enums.UserRoleEnum;
 import com.rd.aicodeuser.service.UserService;

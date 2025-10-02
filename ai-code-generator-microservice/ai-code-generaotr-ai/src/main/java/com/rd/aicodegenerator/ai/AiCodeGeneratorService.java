@@ -8,8 +8,6 @@ import dev.langchain4j.service.TokenStream;
 import dev.langchain4j.service.UserMessage;
 import reactor.core.publisher.Flux;
 
-import java.io.File;
-
 public interface AiCodeGeneratorService {
 
     /**
