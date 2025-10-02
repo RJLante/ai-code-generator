@@ -1,7 +1,7 @@
 package com.rd.aicodeuser.mapper;
 
 import com.mybatisflex.core.BaseMapper;
-import com.rd.aicodeuser.model.entity.User;
+import com.rd.aicodegenerator.model.entity.User;
 
 /**
  * 用户 映射层。

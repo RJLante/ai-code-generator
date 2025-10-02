@@ -6,14 +6,14 @@ import cn.hutool.core.util.StrUtil;
 import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import com.rd.aicodeuser.service.UserService;
-import com.rd.aicodeuser.common.exception.BusinessException;
-import com.rd.aicodeuser.common.exception.ErrorCode;
-import com.rd.aicodeuser.model.dto.user.UserQueryRequest;
-import com.rd.aicodeuser.model.entity.User;
+import com.rd.aicodegenerator.common.exception.BusinessException;
+import com.rd.aicodegenerator.common.exception.ErrorCode;
+import com.rd.aicodegenerator.model.dto.user.UserQueryRequest;
+import com.rd.aicodegenerator.model.entity.User;
 import com.rd.aicodeuser.mapper.UserMapper;
-import com.rd.aicodeuser.model.enums.UserRoleEnum;
-import com.rd.aicodeuser.model.vo.LoginUserVO;
-import com.rd.aicodeuser.model.vo.UserVO;
+import com.rd.aicodegenerator.model.enums.UserRoleEnum;
+import com.rd.aicodegenerator.model.vo.LoginUserVO;
+import com.rd.aicodegenerator.model.vo.UserVO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.rd.aicodeuser.common.constant.UserConstant.USER_LOGIN_STATE;
+import static com.rd.aicodegenerator.common.constant.UserConstant.USER_LOGIN_STATE;
 
 /**
  * 用户 服务层实现。

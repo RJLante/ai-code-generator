@@ -1,10 +1,10 @@
 package com.rd.aicodeuser.aop;
 
-import com.rd.aicodeuser.common.annotation.AuthCheck;
-import com.rd.aicodeuser.common.exception.BusinessException;
-import com.rd.aicodeuser.common.exception.ErrorCode;
-import com.rd.aicodeuser.model.entity.User;
-import com.rd.aicodeuser.model.enums.UserRoleEnum;
+import com.rd.aicodegenerator.common.annotation.AuthCheck;
+import com.rd.aicodegenerator.common.exception.BusinessException;
+import com.rd.aicodegenerator.common.exception.ErrorCode;
+import com.rd.aicodegenerator.model.entity.User;
+import com.rd.aicodegenerator.model.enums.UserRoleEnum;
 import com.rd.aicodeuser.service.UserService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;

@@ -2,10 +2,10 @@ package com.rd.aicodeuser.service;
 
 import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.core.service.IService;
-import com.rd.aicodeuser.model.dto.user.UserQueryRequest;
-import com.rd.aicodeuser.model.entity.User;
-import com.rd.aicodeuser.model.vo.LoginUserVO;
-import com.rd.aicodeuser.model.vo.UserVO;
+import com.rd.aicodegenerator.model.dto.user.UserQueryRequest;
+import com.rd.aicodegenerator.model.entity.User;
+import com.rd.aicodegenerator.model.vo.LoginUserVO;
+import com.rd.aicodegenerator.model.vo.UserVO;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
